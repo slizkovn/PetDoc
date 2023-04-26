@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:gravity="center"
+    android:orientation="horizontal"
+    tools:context=".Fragments.EntryFragment"
+    android:layout_marginBottom="20dp">
+
+
+    <Button
+        android:id="@+id/pets_button"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:insetLeft="5dp"
+        android:insetRight="2dp"
+        android:text="Pets" />
+
+    <Button
+        android:id="@+id/chat_button"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:insetLeft="2dp"
+        android:insetRight="2dp"
+        android:text="Chat"
+        />
+
+    <Button
+        android:id="@+id/appointments_button"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:insetLeft="2dp"
+        android:insetRight="2dp"
+        android:text="Sched" />
+
+    <Button
+        android:id="@+id/prices_button"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:text="Prices"
+        android:insetLeft="2dp"
+        android:insetRight="5dp"
+        android:bottomLeftRadius="20dp"
+        android:topLeftRadius="20dp"/>
+</LinearLayout>

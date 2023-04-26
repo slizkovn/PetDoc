@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:layout_margin="50dp"
+    tools:context=".Fragments.PetAddFragment">
+
+    <TextView
+        android:gravity="center"
+        android:text="Pet name:"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:text=""
+        android:id="@+id/editTextPetName"
+        android:layout_width="192dp"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:gravity="center"
+        android:text="Age (years):"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:text=""
+        android:id="@+id/editTextPetAge"
+        android:layout_width="192dp"
+        android:layout_height="wrap_content"
+        android:inputType="number" />
+
+    <TextView
+        android:gravity="center"
+        android:text="Pet type:"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Spinner
+        android:id="@+id/petType"
+        android:layout_width="192dp"
+        android:layout_height="wrap_content">
+    </Spinner>
+
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="250dp"
+        android:gravity="center">
+        <Button
+            android:id="@+id/backToPets_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Go back"
+            android:layout_margin="10dp"/>
+        <Button
+            android:id="@+id/createPet_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_margin="10dp"
+            android:text="Create!" />
+    </LinearLayout>
+
+
+</LinearLayout>
