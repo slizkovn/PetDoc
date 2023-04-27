@@ -47,6 +47,17 @@
             tools:text="date"
             android:textColor="@color/white"
             tools:ignore="MissingConstraints" />
+        <TextView
+            android:id="@+id/priceText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:gravity="center"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            tools:text="price"
+            android:textColor="@color/white"
+            tools:ignore="MissingConstraints" />
     </LinearLayout>
 
 

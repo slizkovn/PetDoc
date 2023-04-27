@@ -34,9 +34,11 @@ public class AppointmentsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         TextView petName = holder.itemView.findViewById(R.id.petNameText);
         TextView doctor = holder.itemView.findViewById(R.id.doctorText);
         TextView date = holder.itemView.findViewById(R.id.dateText);
+        TextView price = holder.itemView.findViewById(R.id.priceText);
         petName.setText(appointments.get(position).getPet());
         doctor.setText("Doctor: " + appointments.get(position).getDoctor());
         date.setText(appointments.get(position).getDate());
+        price.setText(appointments.get(position).getPrice()+" Rub");
     }
 
     @Override
