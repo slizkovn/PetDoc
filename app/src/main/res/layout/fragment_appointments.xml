@@ -10,7 +10,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/appointmentsRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="640dp" />
+        android:layout_height="620dp" />
 
         <LinearLayout
             android:layout_width="match_parent"

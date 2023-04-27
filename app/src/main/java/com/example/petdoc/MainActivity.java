@@ -27,8 +27,8 @@ public class MainActivity extends AppCompatActivity {
         ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        //loadMessagesToDb();
-        //loadDoctorsToDb();
+        loadMessagesToDb();
+        loadDoctorsToDb();
 
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.main_fragment, new EntryFragment())
@@ -57,10 +57,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void loadMessagesToDb(){
         MessagesDatabase db = MessagesDatabase.getMessagesDatabase(this);
+        /*
         for (Message i: db.MessagesDao().getMessages()){
             Log.i("1",i.getText()+" "+i.getDate()+" "+i.getUserId());
             db.MessagesDao().delete(i);
-        }
+        } */
         db.MessagesDao().insertMessage(new Message(0,"Наш оператор на связи", String.valueOf(Calendar.getInstance().getTime())));
     }
     public void loadDoctorsToDb(){
