@@ -1,8 +1,14 @@
 package com.example.petdoc.Adapters;
 
+import static android.graphics.Color.parseColor;
+
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -32,9 +38,15 @@ public class MessagesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         TextView text = holder.itemView.findViewById(R.id.messageText);
         TextView date = holder.itemView.findViewById(R.id.messageDate);
-        //Log.i("MYtag", ""+pets.get(position));
         text.setText(messages.get(position).getText());
         date.setText(messages.get(position).getDate());
+        LinearLayout ll = holder.itemView.findViewById(R.id.msg);
+        if (messages.get(position).getUserId() == 0){
+            ll.setBackgroundColor(Color.parseColor("#ffffa9a9"));
+            ll.setGravity(Gravity.LEFT);
+            text.setGravity(Gravity.LEFT);
+            date.setGravity(Gravity.LEFT);
+        }
     }
 
     @Override

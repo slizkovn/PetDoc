@@ -1,8 +1,10 @@
 package com.example.petdoc.Adapters;
 
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -32,9 +34,14 @@ public class PetsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         TextView nText = holder.itemView.findViewById(R.id.nameText);
         TextView nAge = holder.itemView.findViewById(R.id.ageText);
         TextView nType = holder.itemView.findViewById(R.id.typeText);
-        Log.i("MYtag", ""+pets.get(position));
+        ImageView nPic = holder.itemView.findViewById(R.id.petTypePic);
+        if (pets.get(position).getType().equals("Cat")){
+            nPic.setImageResource(R.drawable.cat);
+        } else if (pets.get(position).getType().equals("Turtle")){
+            nPic.setImageResource(R.drawable.turtle);
+        }
         nText.setText(pets.get(position).getName());
-        nAge.setText(String.valueOf(pets.get(position).getAge())+" years");
+        nAge.setText(pets.get(position).getAge() +" years");
         nType.setText(pets.get(position).getType());
     }
 

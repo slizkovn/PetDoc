@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.example.petdoc.MainActivity;
 import com.example.petdoc.R;
@@ -21,7 +22,7 @@ public class WinbarFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_winbar, container, false);
 
-        Button priceButton = (Button) v.findViewById(R.id.prices_button);
+        ImageButton priceButton = (ImageButton) v.findViewById(R.id.prices_button);
         priceButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -30,7 +31,7 @@ public class WinbarFragment extends Fragment {
             }
         });
 
-        Button appointmentsButton = (Button) v.findViewById(R.id.appointments_button);
+        ImageButton appointmentsButton = (ImageButton) v.findViewById(R.id.appointments_button);
         appointmentsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -39,7 +40,7 @@ public class WinbarFragment extends Fragment {
             }
         });
 
-        Button petsButton = (Button) v.findViewById(R.id.pets_button);
+        ImageButton petsButton = (ImageButton) v.findViewById(R.id.pets_button);
         petsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -48,7 +49,7 @@ public class WinbarFragment extends Fragment {
             }
         });
 
-        Button chatButton = (Button) v.findViewById(R.id.chat_button);
+        ImageButton chatButton = (ImageButton) v.findViewById(R.id.chat_button);
         chatButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

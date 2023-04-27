@@ -2,7 +2,7 @@ package com.example.petdoc;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelStore;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -14,14 +14,11 @@ import com.example.petdoc.Repositories.Doctor;
 import com.example.petdoc.Repositories.DoctorsDatabase;
 import com.example.petdoc.Repositories.Message;
 import com.example.petdoc.Repositories.MessagesDatabase;
-import com.example.petdoc.Repositories.Pet;
-import com.example.petdoc.Repositories.PetDatabase;
 import com.example.petdoc.databinding.ActivityMainBinding;
 
-import java.util.Map;
+import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,15 +27,8 @@ public class MainActivity extends AppCompatActivity {
         ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-
-        MessagesDatabase db = MessagesDatabase.getMessagesDatabase(this);
-        for (Message i: db.MessagesDao().getMessages()){
-            Log.i("1",i.getText()+" "+i.getDate()+" "+i.getUserId());
-            db.MessagesDao().delete(i);
-        }
-        db.MessagesDao().insertMessage(new Message(1,"first", "19:30 23.04.2023"));
-        db.MessagesDao().insertMessage(new Message(0,"second", "19:31 23.04.2023"));
-        loadDoctorsToDb();
+        //loadMessagesToDb();
+        //loadDoctorsToDb();
 
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.main_fragment, new EntryFragment())
@@ -57,6 +47,22 @@ public class MainActivity extends AppCompatActivity {
                 .commit();
     }
 
+    public void hideWinbar(View v){
+        v.findViewById(R.id.winbar_fragment).setVisibility(View.GONE);
+    }
+
+    public void showWinbar(View v){
+        v.findViewById(R.id.winbar_fragment).setVisibility(View.VISIBLE);
+    }
+
+    public void loadMessagesToDb(){
+        MessagesDatabase db = MessagesDatabase.getMessagesDatabase(this);
+        for (Message i: db.MessagesDao().getMessages()){
+            Log.i("1",i.getText()+" "+i.getDate()+" "+i.getUserId());
+            db.MessagesDao().delete(i);
+        }
+        db.MessagesDao().insertMessage(new Message(0,"Наш оператор на связи", String.valueOf(Calendar.getInstance().getTime())));
+    }
     public void loadDoctorsToDb(){
         DoctorsDatabase db = DoctorsDatabase.getDoctorsDatabase(this);
         db.DoctorsDao().insertDoctor(new Doctor("Dima", "therapist", "Dog", "05.05.2023", 1000));

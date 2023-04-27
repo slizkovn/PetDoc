@@ -9,42 +9,49 @@
     android:layout_marginBottom="20dp">
 
 
-    <Button
+    <ImageButton
         android:id="@+id/pets_button"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:insetLeft="5dp"
         android:insetRight="2dp"
-        android:text="Pets" />
+        android:scaleType="fitCenter"
+        android:background="@color/pink"
+        android:src = "@drawable/pets" />
 
-    <Button
+    <ImageButton
         android:id="@+id/chat_button"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:insetLeft="2dp"
-        android:insetRight="2dp"
-        android:text="Chat"
+        android:insetLeft="5dp"
+        android:insetRight="5dp"
+        android:scaleType="fitCenter"
+        android:background="@color/pink"
+        android:src = "@drawable/chat"
         />
 
-    <Button
+    <ImageButton
         android:id="@+id/appointments_button"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:insetLeft="2dp"
         android:insetRight="2dp"
-        android:text="Sched" />
+        android:scaleType="fitCenter"
+        android:background="@color/pink"
+        android:src = "@drawable/appointmets"/>
 
-    <Button
+    <ImageButton
         android:id="@+id/prices_button"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:text="Prices"
         android:insetLeft="2dp"
         android:insetRight="5dp"
-        android:bottomLeftRadius="20dp"
-        android:topLeftRadius="20dp"/>
+        android:scaleType="fitCenter"
+        android:background="@color/pink"
+        android:src = "@drawable/prices"
+/>
 </LinearLayout>

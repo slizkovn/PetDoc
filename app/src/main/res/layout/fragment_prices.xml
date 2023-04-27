@@ -8,6 +8,7 @@
     android:orientation="vertical">
 
     <TextView
+        android:textSize="16dp"
         android:text="Primary therapist appointment 1200.00\n
 Repeat appointment of the therapist 800.00\n
 Initial appointment of a specialist doctor 2000,00\n

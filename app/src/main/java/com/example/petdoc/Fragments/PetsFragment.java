@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.petdoc.Adapters.PetsAdapter;
@@ -50,7 +51,7 @@ public class PetsFragment extends Fragment{
         recycler.setLayoutManager(new LinearLayoutManager(this.getContext()));
         recycler.setAdapter(adapter);
 
-        Button appendButton = (Button) v.findViewById(R.id.append_button);
+        ImageButton appendButton = (ImageButton) v.findViewById(R.id.append_button);
         appendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,7 +60,7 @@ public class PetsFragment extends Fragment{
             }
         });
 
-        Button deleteButton = (Button) v.findViewById(R.id.delete_button);
+        ImageButton deleteButton = (ImageButton) v.findViewById(R.id.delete_button);
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

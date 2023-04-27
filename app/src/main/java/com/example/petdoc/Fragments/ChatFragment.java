@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 
 import com.example.petdoc.Adapters.MessagesAdapter;
@@ -22,9 +23,12 @@ import com.example.petdoc.Repositories.Appointment;
 import com.example.petdoc.Repositories.AppointmentsDatabase;
 import com.example.petdoc.Repositories.Message;
 import com.example.petdoc.Repositories.MessagesDatabase;
+import com.example.petdoc.Repositories.PetDatabase;
 
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class ChatFragment extends Fragment{
@@ -42,6 +46,9 @@ public class ChatFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_chat, container, false);
+
+        EditText text = (EditText) v.findViewById(R.id.messageSendText);
+
         RecyclerView recycler = v.findViewById(R.id.ChatRecyclerView);
         recycler.setLayoutManager(new LinearLayoutManager(this.getContext()));
         recycler.setAdapter(adapter);
@@ -50,11 +57,33 @@ public class ChatFragment extends Fragment{
         appendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                MessagesDatabase db = MessagesDatabase.getMessagesDatabase(getActivity());
+                Date date = Calendar.getInstance().getTime();
+                db.MessagesDao().insertMessage(new Message(1, text.getText().toString(), String.valueOf(date)));
                 MainActivity mainActivity = (MainActivity)getActivity();
                 mainActivity.changeFragment(new ChatFragment());
             }
         });
+
+        ImageButton callButton = (ImageButton) v.findViewById(R.id.videocall_button);
+        callButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity mainActivity = (MainActivity)getActivity();
+                //mainActivity.showWinbar();
+                mainActivity.changeFragment(new VideoCallFragment());
+            }
+        });
+
+        text.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity mainActivity = (MainActivity)getActivity();
+                //mainActivity.hideWinbar();
+            }
+
+        });
+
         return v;
     }
 
@@ -64,7 +93,6 @@ public class ChatFragment extends Fragment{
         messages.clear();
         for (int i = 0;i < db.MessagesDao().getMessages().size(); ++i){
             Message p = db.MessagesDao().getMessages().get(i);
-            Log.i("refresh", "-"+i);
             messages.add(new Message(p.getUserId(), p.getText(), p.getDate()));
         }
         adapter.notifyDataSetChanged();

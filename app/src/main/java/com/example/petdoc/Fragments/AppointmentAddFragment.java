@@ -25,8 +25,10 @@ import com.example.petdoc.Repositories.DoctorsDatabase;
 import com.example.petdoc.Repositories.Pet;
 import com.example.petdoc.Repositories.PetDatabase;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 
 public class AppointmentAddFragment extends Fragment {
@@ -55,7 +57,7 @@ public class AppointmentAddFragment extends Fragment {
 
         DocsDB = DoctorsDatabase.getDoctorsDatabase(getActivity());
         Docs = DocsDB.DoctorsDao().getDoctors();
-        Log.i("Docs size", Docs.size()+"");
+        //Log.i("Docs size", Docs.size()+"");
         Spinner PetNameSpinner = (Spinner) v.findViewById(R.id.petForAppointmentName);
         PetDatabase PetNamesDb = PetDatabase.getAppDatabase(getActivity());
         List<Pet> petsListFromDb = PetNamesDb.PetDao().getPets();
@@ -71,7 +73,7 @@ public class AppointmentAddFragment extends Fragment {
 
         Spinner DocTypeSpinner = (Spinner) v.findViewById(R.id.doctorTypeForAppointment);
         List<String> DocsTypes = DocsDB.DoctorsDao().getDoctorsTypes();
-        Log.i("DoctorTypes", PETTYPE[0]+""+DocsTypes.size());
+        //Log.i("DoctorTypes", PETTYPE[0]+""+DocsTypes.size());
         ArrayAdapter<String> DocTypeAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_item, DocsTypes);
         DocTypeAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
         DocTypeSpinner.setAdapter(DocTypeAdapter);
@@ -102,11 +104,11 @@ public class AppointmentAddFragment extends Fragment {
                         PETNAME[0] = i.getName();
                     }
                 }
-                Log.i("PETTYPE", PETTYPE[0]+"");
-                Log.i("DOCS size", Docs.size()+"");
+                //Log.i("PETTYPE", PETTYPE[0]+"");
+                //Log.i("DOCS size", Docs.size()+"");
                 DocsTypes.clear();
                 for (Doctor i : Docs){
-                    if (i.getAnimalType().equals(PETTYPE[0])){ Log.i("TYPE_Y", i.getAnimalType());DocsTypes.add(i.getDocType());} else {Log.i("TYPE_n", i.getAnimalType());}
+                    if (i.getAnimalType().equals(PETTYPE[0]) && !DocsTypes.contains(i.getDocType())){ Log.i("TYPE_Y", i.getAnimalType());DocsTypes.add(i.getDocType());} else {Log.i("TYPE_n", i.getAnimalType());}
                 }
                 SuitableDoctors.clear();
                 SuitableDates.clear();
@@ -153,7 +155,7 @@ public class AppointmentAddFragment extends Fragment {
                         SuitableDates.add(i.getDate());
                     }
                 }
-                Log.i("dates", SuitableDates.size()+""+SuitableDates.get(0));
+                //Log.i("dates", SuitableDates.size()+""+SuitableDates.get(0));
                 ((TextView) v.findViewById(R.id.appointment_price)).setText("- Rub");
                 DateAdapter.notifyDataSetChanged();
             }
@@ -170,7 +172,7 @@ public class AppointmentAddFragment extends Fragment {
                         TextView price = (TextView) v.findViewById(R.id.appointment_price);
                         price.setText(DOCNAME[0] + " " + i.getPrice() + " Rub");
                         PRICE = i.getPrice();
-                        Log.i("price", DOCNAME[0] +"------"+i.getPrice());
+                        //Log.i("price", DOCNAME[0] +"------"+i.getPrice());
                     }
                 }
 
@@ -199,7 +201,7 @@ public class AppointmentAddFragment extends Fragment {
                     MainActivity mainActivity = (MainActivity)getActivity();
                     mainActivity.changeFragment(new AppointmentsFragment());
                 } else {
-                    Log.i("appointment_err", PRICE+"");
+                    //Log.i("appointment_err", PRICE+"");
                 }
             }
         });
