@@ -1,38 +1,59 @@
 package com.example.petdoc;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelStore;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.StrictMode;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 
-import com.example.petdoc.Fragments.EntryFragment;
-import com.example.petdoc.Fragments.WinbarFragment;
-import com.example.petdoc.Repositories.Doctor;
-import com.example.petdoc.Repositories.DoctorsDatabase;
-import com.example.petdoc.Repositories.Message;
-import com.example.petdoc.Repositories.MessagesDatabase;
+import com.example.petdoc.ui.entry.EntryFragment;
+import com.example.petdoc.ui.navigation.WinbarFragment;
+import com.example.petdoc.data.entities.Message;
 import com.example.petdoc.databinding.ActivityMainBinding;
+import com.example.petdoc.ui.pets.PetAddFragment;
+import com.example.petdoc.ui.pets.PetsFragment;
+import com.example.petdoc.ui.view_models.ChatViewModel;
 
 import java.util.Calendar;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+
+    private static Fragment winFrag = new WinbarFragment();
+    public static int USERID = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
+
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
         ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        loadMessagesToDb();
-        loadDoctorsToDb();
 
-        getSupportFragmentManager().beginTransaction()
-                .add(R.id.main_fragment, new EntryFragment())
-                .commit();
+
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+        Log.i("mytag", "USERID: "+sharedPreferences.getInt("id", 1));
+        if (sharedPreferences.getInt("id", 1) == 1){
+            getSupportFragmentManager().beginTransaction().add(R.id.main_fragment, new EntryFragment()).commit();
+        } else {
+            USERID = sharedPreferences.getInt("id", 1);
+            sendInTouch();
+            appendWinbar();
+            changeFragment(new PetsFragment());
+        }
+
+
 
     }
 
@@ -43,38 +64,31 @@ public class MainActivity extends AppCompatActivity {
 
     public void appendWinbar(){
         getSupportFragmentManager().beginTransaction()
-                .add(R.id.winbar_fragment, new WinbarFragment())
+                .add(R.id.winbar_fragment, winFrag)
                 .commit();
     }
 
-    public void hideWinbar(View v){
-        v.findViewById(R.id.winbar_fragment).setVisibility(View.GONE);
+    public void hideWinbar(){
+        winFrag.getView().setVisibility(View.GONE);
     }
 
-    public void showWinbar(View v){
-        v.findViewById(R.id.winbar_fragment).setVisibility(View.VISIBLE);
+    public void showWinbar(){
+        winFrag.getView().setVisibility(View.VISIBLE);
     }
 
-    public void loadMessagesToDb(){
-        MessagesDatabase db = MessagesDatabase.getMessagesDatabase(this);
-        /*
-        for (Message i: db.MessagesDao().getMessages()){
-            Log.i("1",i.getText()+" "+i.getDate()+" "+i.getUserId());
-            db.MessagesDao().delete(i);
-        } */
-        db.MessagesDao().insertMessage(new Message(0,"Наш оператор на связи", String.valueOf(Calendar.getInstance().getTime())));
-    }
-    public void loadDoctorsToDb(){
-        DoctorsDatabase db = DoctorsDatabase.getDoctorsDatabase(this);
-        db.DoctorsDao().insertDoctor(new Doctor("Dima", "therapist", "Dog", "05.05.2023", 1000));
-        db.DoctorsDao().insertDoctor(new Doctor("Dima", "therapist", "Cat", "05.05.2023", 800));
-        db.DoctorsDao().insertDoctor(new Doctor("Bob", "therapist", "Turtle", "07.05.2023", 1500));
-        db.DoctorsDao().insertDoctor(new Doctor("Alice", "nutritionist", "Dog", "05.05.2023", 1000));
-        db.DoctorsDao().insertDoctor(new Doctor("Zoy", "therapist", "Cat", "08.05.2023", 1800));
-        db.DoctorsDao().insertDoctor(new Doctor("Bob", "nutritionist", "Turtle", "05.05.2023", 1500));
-        db.DoctorsDao().insertDoctor(new Doctor("Zoy", "therapist", "Turtle", "09.05.2023", 1700));
-        db.DoctorsDao().insertDoctor(new Doctor("Dima", "nutritionist", "Cat", "05.05.2023", 800));
-        db.DoctorsDao().insertDoctor(new Doctor("Bob", "therapist", "Dog", "10.05.2023", 2000));
+    @Override
+    public void onBackPressed()
+    {
+        showWinbar();
     }
 
+    public void sendInTouch(){
+        ChatViewModel chatViewModel = new ChatViewModel(this);
+        List<Message> messages = chatViewModel.getMessages();
+        if (messages.size() == 0 || !messages.get(messages.size()-1).getText().equals("Наш оператор на связи")){
+            String dateTime = Calendar.getInstance().getTime().toString();
+            dateTime = dateTime.substring(4, dateTime.length()-12);
+            chatViewModel.insertMessage(new Message(0, USERID, "Наш оператор на связи", dateTime));
+        }
+    }
 }

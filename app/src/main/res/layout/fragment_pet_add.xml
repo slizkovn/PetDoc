@@ -6,7 +6,7 @@
     android:gravity="center_horizontal"
     android:orientation="vertical"
     android:layout_margin="50dp"
-    tools:context=".Fragments.PetAddFragment">
+    tools:context=".ui.pets.PetAddFragment">
 
     <TextView
         android:gravity="center"
@@ -44,23 +44,39 @@
         android:layout_height="wrap_content">
     </Spinner>
 
+    <TextView
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:text="Anamnesis of pet diseases:"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:text=""
+        android:id="@+id/editTextPetHistory"
+        android:layout_width="192dp"
+        android:layout_height="wrap_content" />
+
+
     <LinearLayout
         android:layout_height="wrap_content"
         android:layout_width="250dp"
-        android:gravity="center">
+        android:gravity="center"
+        android:layout_marginTop="10dp">
         <Button
             android:id="@+id/backToPets_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="Go back"
-            android:layout_margin="10dp"/>
+            android:background="@drawable/round_left_background"
+            android:layout_margin="5dp"/>
         <Button
             android:id="@+id/createPet_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:layout_margin="10dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/round_right_background"
             android:text="Create!" />
     </LinearLayout>
 
