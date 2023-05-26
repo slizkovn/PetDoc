@@ -52,6 +52,10 @@ public class PetAddFragment extends Fragment {
                 if (!String.valueOf(age.getText()).equals("")){
                     n = Integer.parseInt(String.valueOf(age.getText()));
                 }
+                if (n > 30) {
+                    Toast.makeText(getActivity(), "Wrong ange", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 Spinner type = (Spinner) getView().findViewById(R.id.petType);
 
                 if (String.valueOf(name.getText()).equals("")){

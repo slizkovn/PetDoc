@@ -1,7 +1,9 @@
 package com.example.petdoc.ui.chat;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.PermissionRequest;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -34,14 +37,18 @@ public class VideoCallFragment extends Fragment {
         WebView webView = v.findViewById(R.id.web_view);
         setMyWebviewSettings(webView);
 
-        webView.setWebViewClient(new WebViewClient() {
+        webView.setWebChromeClient(new WebChromeClient() {
+            @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+            @Override
+            public void onPermissionRequest(final PermissionRequest request) {
+                request.grant(request.getResources());
+            }
             public boolean shouldOverrideUrlLoading (WebView view, String url){
-                //True if the host application wants to leave the current WebView and handle the url itself, otherwise return false.
                 return true;
             }
         });
 
-        webView.loadUrl("https://meet.jit.si/PetDoc"+ MainActivity.USERID);
+        webView.loadUrl("https://meet.jit.si/PetDoc"+ MainActivity.USERID+"#config.disableDeepLinking=true");
         return v;
     }
 
@@ -56,7 +63,8 @@ public class VideoCallFragment extends Fragment {
         MyWebviewSettings.setAllowFileAccess(true);
         MyWebviewSettings.setSupportZoom(true);
         MyWebviewSettings.setSupportMultipleWindows(true);
-        String desktopBrowser= "Mozilla/5.0";
-        MyWebviewSettings.setUserAgentString(desktopBrowser);
+        MyWebviewSettings.setMediaPlaybackRequiresUserGesture(false);
+        //String desktopBrowser= "Mozilla/5.0";
+        //MyWebviewSettings.setUserAgentString(desktopBrowser);
     }
 }

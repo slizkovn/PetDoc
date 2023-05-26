@@ -54,7 +54,7 @@
                 android:background="@drawable/round_left_background"
                 android:src = "@drawable/appointmets_add"/>
 
-            <EditText
+            <TextView
                 android:id="@+id/totalCost"
                 android:layout_width="0dp"
                 android:layout_weight="1"
@@ -63,7 +63,7 @@
                 android:background="@color/pink"
                 android:gravity="center"
                 android:textColor="@color/white"
-                ></EditText>
+                ></TextView>
 
             <ImageButton
                 android:id="@+id/payAppointments_button"
